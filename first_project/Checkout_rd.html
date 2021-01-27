@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Pagina Checkout</title>
+</head>
+<body>
+
+<form id="regForm" >
+  <h1>Checkout:</h1>
+  <!-- One "tab" for each step in the form: -->
+  <div class="tab">Datos Personales:
+    <p><input placeholder="Nombres..." oninput="this.className = ''" name="fname"></p>
+    <p><input placeholder="Apellidos..." oninput="this.className = ''" name="lname"></p>
+  <!-- <div class="tab">Contact Info: -->
+    <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
+    <p><input placeholder="Telefono..." oninput="this.className = ''" name="phone"></p>
+  </div>
+
+  <div class="tab">Informacion de Envio:
+    <p><input placeholder="Direccion..." oninput="this.className = ''" name="uname"></p>
+    <p><input placeholder="Ciudad..." oninput="this.className = ''" name="pword" type="city"></p>
+  </div>
+  <div class="tab">Informacion de Pago
+    <p><input placeholder="Numero de Tarjeta..." oninput="this.className = ''" ></p>
+    <p><input placeholder="Fecha de expiracion..." oninput="this.className = ''" type="text"></p>
+    <p><input placeholder="ccv..." oninput="this.className = ''" name="pword" type="password"></p>
+  </div>
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Siguiente</button>
+    </div>
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+</form>
+
+<script src="checkout.js"></script>
+
+</body>
+</html>
