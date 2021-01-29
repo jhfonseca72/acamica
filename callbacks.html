@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      const ticket = {
+        number: "77777",
+        price: 80,
+      };
+      const seller = "Acamica";
+
+      function payTicket(miFUnction, callback2, ticket) {
+        miFUnction(ticket); //miFUnction = addTaxes -> addTaxes(ticket)
+        callback2(ticket); // callback2 = addSeller -> addSeller(ticket)
+        console.log(ticket);
+      }
+
+      function addTaxes(ticket) {
+        ticket.price = ticket.price + 10;
+      }
+
+      function addSeller(ticket) {
+        ticket.seller = seller;
+      }
+      payTicket(addTaxes, addSeller, ticket);
+
+      //[function addTaxes(){}, function addSeller(){}]
+      function payTicketArray(arrayDeFunciones, ticket) {
+        for (let index = 0; index < arrayDeFunciones.length; index++) {
+          if (typeof arrayDeFunciones[index] === "function") {
+            arrayDeFunciones[index](ticket);
+          } else {
+            console.log("no es una funcion", arrayDeFunciones[index]);
+          }
+        }
+      }
+
+      payTicketArray([addTaxes, addSeller, 89], ticket);
+      console.log(ticket);
+
+      function calculadora(numero1, numero2, operador) {
+        if (operador === "+") return numero1 + numero2;
+        if (operador === "-") return numero1 - numero2;
+        if (operador === "muycomplejo") return numero1 ** 2 + numero2 / 78;
+      }
+      calculadora(1, 2, "+");
+
+      function calculadoraCallback(numero1, numero2, callback) {
+        callback(numero1, numero2);
+      }
+
+      function suma(numero1, numero2) {
+        return numero1 + numero2;
+      }
+
+      // fail calculadoraCallback(suma(5, 8), 4, 7); // 4,7,13
+      calculadoraCallback(1, 2, (a, b) => a + b);
+      calculadoraCallback(1, 2, (a, b) => a - b);
+      calculadoraCallback(1, 2, (a, b) => a ** 2 + b / 78);
+
+      //Async
+      const asynTimeOut = setTimeout(() => {
+        console.log("Termine");
+      }, 3000);
+
+      console.log("Start async");
+      asynTimeOut;
+      console.log("End async");
+    </script>
+  </head>
+  <body></body>
+</html>
