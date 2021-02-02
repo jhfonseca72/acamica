@@ -43,7 +43,11 @@
         desafiante aprender online si solo se trata de ti, pero es maravilloso
         si se trata de todos.
       </p>
-      <img src="airplane-1651267-1402988.png" id="animation" height="80rem" />
+      <img
+        src="imgs/clothes/svg/antique-dress.svg"
+        id="animation"
+        height="80rem"
+      />
     </main>
     <footer>
       <div>
@@ -53,32 +57,60 @@
       </div>
     </footer>
     <script>
-      const menu = ["Log in", "About Us"];
+      var practicandoHoisting = undefined;
+      console.log(practicandoHoisting); //undefined
+      practicandoHoisting = "practicandoHoisting";
+      console.log(practicandoHoisting); //practicandoHoisting
 
-      const body = document.querySelector("body");
-      body.style.fontFamily = "Poppins";
-      body.style.textAlign = "center";
-      body.style.backgroundColor = "#edeeef";
+      function miHoistingFunction() {
+        console.log("miHoistingFunction");
+      }
 
-      const header = document.getElementById("hd-acamica");
+      console.log(miHoistingFunction);
+      console.log(miHoistingFunction);
+
+      let practicandoHoistingLet = "practicandoHoistingLet";
+
+      const header = document.getElementById("hd-acamica"); //HTMLElement
+      console.log(header);
+
       header.style.textAlign = "center";
       header.style.fontSize = "26px";
       header.style.color = "rgb(249, 60, 58)";
       header.style.fontWeight = "bold";
-
-      const newMenu = document.createElement("ul");
-      for (let index = 0; index < menu.length; index++) {
-        const newItem = document.createElement("li");
-        newItem.textContent = menu[index];
-        newItem.id = `menu-${index}`;
-        newItem.classList.add("itemMenuItem");
-        newMenu.appendChild(newItem);
-      }
-
-      newMenu.classList.add("itemMenuList");
+      console.log(header.innerHTML);
+      header.innerHTML = "<button>HOLA</button><h1>HHHHH</h1>";
 
       const main = document.getElementsByTagName("main");
-      main[0].appendChild(newMenu);
+      //main[0] HTMLElement ->.... getElementsByTagName, getElementById, querySelector
+      const ps = main[0].getElementsByTagName("p");
+      console.log(ps);
+
+      const ps2 = document.querySelectorAll("main p");
+      for (let index = 0; index < ps2.length; index++) {
+        ps2[index].style.color = "aqua"; //HTMLElement
+      }
+      console.log(ps2);
+
+      /*<ol>
+        <li>Jhoan</li>
+        <li>Jilmar</li>
+        </ol
+        */
+
+      const ol = document.createElement("ol"); //HTMLElement
+
+      const li1 = document.createElement("li"); //HTMLElement
+      li1.innerText = "Jhoan";
+      li1.style.color = "blue"; //<li style='color:blue'>Jhoan</li>
+      li1.classList.add("customClassLi"); //<li class='customClassLi'>Jhoan</li>
+
+      const li2 = document.createElement("li"); //HTMLElement
+      li2.innerText = "Jilmar";
+
+      ol.appendChild(li1);
+      ol.appendChild(li2); //agrega al element ol el li2
+      header.appendChild(ol);
 
       document
         .getElementById("animation")
@@ -87,20 +119,55 @@
           iterations: Infinity,
         });
 
-      document.querySelector("input").placeholder = "Ingresa tu email";
+      const email = document.getElementsByTagName("input")[0]; //HTMLElement
+      console.log(email);
 
-      //Programamos
-      /*const nombre = prompt("Ingrese su nombre");
-      const fontSize = prompt("Ingrese el font-size");
-      const fontColor = prompt("Ingrese el font-color");
+      const emailCustomSelector = document.querySelector("input[type='text']");
+      console.log(emailCustomSelector);
+      emailCustomSelector.placeholder = "ingresa tu email";
+      emailCustomSelector.value = "jhfonseca72";
+      console.log(emailCustomSelector.value);
 
-      const box = document.createElement("div");
-      box.style.fontSize = fontSize + "px";
-      box.style.color = fontColor;
-      box.innerHTML = nombre;
+      const mails = [];
+      function ejecutarCuandoDenClick(event) {
+        const email = document.querySelector("input[type='text']");
+        console.log("Me dieron click", email.value);
+        mails.push(email.value);
+        localStorage.setItem("emails", mails);
+        console.log(mails);
+        email.value = "";
+      }
 
-      const body = document.getElementsByTagName("body");
-      body[0].appendChild(box);*/
+      const buttons = document.querySelectorAll("button"); //arreglo de botones
+      const btnContactar = buttons[1]; //buttons[1] -> boton de contactar
+
+      /* 2 argumentos, 1ro es el evento(click, focus, hover, blur, keypres, dblclick) es un string , 2do calll o funcion que se va a ejecutar cada vez que se haga el evento */
+      btnContactar.addEventListener("click", ejecutarCuandoDenClick); //
+      console.log(btnContactar);
+
+      class Persona {
+        constructor(name) {
+          this.name = name;
+        }
+        replaceNameByAsciiChars() {
+          return this.name.replace("a", "34");
+        }
+      }
+
+      console.log(Persona);
+      const jilmar = new Persona("Jilmar");
+      console.log(jilmar.replaceNameByAsciiChars());
+
+      function MyPersona(name) {
+        this.name = name;
+        this.replaceNameByAsciiChars = function () {
+          return name.replace("a", "34");
+        };
+      }
+
+      console.log(MyPersona);
+      const jilmar2 = new MyPersona("Jilmar");
+      console.log(jilmar2.replaceNameByAsciiChars());
     </script>
   </body>
 </html>
