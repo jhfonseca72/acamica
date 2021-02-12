@@ -1,0 +1,62 @@
+body {
+  font-family: "Poppins";
+  background: #6ab7ff;
+}
+
+.map_container {
+  width: 100%;
+  height: 300px;
+  border-radius: 2rem;
+}
+
+.news {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  color: white;
+}
+
+.article {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  margin: 14px;
+  padding: 1rem;
+  border: #ffffff solid 1px;
+  text-decoration: none;
+}
+
+.news-img {
+  border-radius: 1rem;
+  width: 100%;
+  height: 13rem;
+}
+
+.phone-products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product {
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin: 9px;
+  border: #ffffff solid 1px;
+}
+
+.product img {
+  width: 70px;
+  height: 32px;
+  margin: 12px;
+}
+.product img:hover {
+  content: "";
+}
+
+@media only screen and (min-width: 768px) {
+  .news {
+    flex-direction: row;
+  }
+  .article {
+    width: 29%;
+  }
+}

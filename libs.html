@@ -4,65 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"/>
+    <link rel="stylesheet" href="css/libs.css" />
+    
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
-
-    <link href="css/products.css" rel="stylesheet" />
-    <style>
-      body {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .center {
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        width: 100%;
-        height: 300px;
-        border-radius: 2rem;
-      }
-    </style>
   </head>
   <body>
-    <div id="map" class="center animate__animated animate__fadeInLeft"></div>
+
+    <div id="map" class="map_container animate__animated animate__fadeInLeft"></div>
     <div class="phone-products"></div>
+    <div class="news"></div>
+
+    <template id="templateNews">
+      <a class="article" href="using here the property data.url">
+        <img class="news-img" src="using here the property data.urlToImage" />
+        <h3>using here the property data.title</h3>
+        <p>using here the property data.content</p>
+      </div>
+    </template>
 
     <script>
+      //using animation.css
       document.documentElement.style.setProperty("--animate-duration", "1s");
 
-      mapboxgl.accessToken =
+      const addMap = () => {
+        mapboxgl.accessToken =
         "pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p1dHRybDR5MGJuZjQzcGhrZ2doeGgwNyJ9.a-vxW4UaxOoUMWUTGnEArw";
-
-      var map = new mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/mapbox/streets-v11",
-        center: [-74.0753486, 4.596805],
-        zoom: 14,
-      });
+        const map = new mapboxgl.Map({
+          container: "map",
+          style: "mapbox://styles/mapbox/streets-v11",
+          center: [-74.0753486, 4.596805],
+          zoom: 14,
+        });
+      }
+      
 
       /**
-            <figure class="product">
-                <img src='...' />
-                <figcaption>...</figcaption>
-            </figure>
-      */
-      function crearImage(productImage, productName) {
+       *  <figure class="product">
+       *    <img src='...' />
+       *    <figcaption>...</figcaption>
+       *   </figure>
+       */ 
+      const crearImage = (productImage, productName) => {
         let figure = document.createElement("figure");
         figure.classList.add("product");
 
@@ -77,17 +63,55 @@
         figure.appendChild(figureCaption);
 
         return figure;
+      };
+
+      const createCardNews = (article) => {
+        const news = document.querySelector(".news");
+        const template = document.querySelector("#templateNews");
+
+        const itemNew = template.content.cloneNode(true);
+        itemNew.querySelector("a").href = article.url;
+        itemNew.querySelector("img").src = article.urlToImage;
+        itemNew.querySelector("h3").textContent = article.title;
+        itemNew.querySelector("p").textContent = article.content;
+        news.appendChild(itemNew);
+
       }
 
-      (async function () {
+      const fetchUsingAxiosLib = async () => {
         const {data} = await axios.get(
           "https://601c74da1a9c220017060a09.mockapi.io/api/v1/products"
         );
-
-        console.log(data);
         for (const img of data) {
           const imageElement = crearImage(img.src, img.text);
           document.querySelector(".phone-products").appendChild(imageElement);
+        }
+      }
+
+      /**
+       * Using a proxy to get the data with CORS
+       * 
+       * The origin "http://127.0.0.1:5500" has sent too many requests.
+       * The number of requests is limited to 50 per 60 minutes. Please self-host CORS 
+       * Anywhere if you need more quota. See https://github.com/Rob--W/cors-anywhere#demo-server
+       */
+      const fetchApiNews = async() => {
+        const proxyUrl = "http://cors-anywhere.herokuapp.com/";
+        const url = `${proxyUrl}https://newsapi.org/v2/everything?apiKey=b0fc156ce2d448a383c8d6ba718c6bb8&q=spacex&pageSize=10`;
+        const reqPromise = await fetch(url, {
+          mode: "cors",
+          headers: {"Access-Control-Allow-Origin": "*"},
+        });
+        const news = await reqPromise.json();
+        news.articles.forEach(createCardNews);
+      }
+
+      (async function () {
+        addMap();
+        try {
+          await Promise.all([fetchUsingAxiosLib(), fetchApiNews()])
+        } catch(e){
+          console.log(e);
         }
       })();
     </script>
