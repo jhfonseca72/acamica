@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script>
+      //Practiquemos
+
+      String.prototype.reverse = function () {
+        const value = String(this);
+        const array = value.split(""); // value=Acamica  [A, c, a, m, i, c, a]
+        const reverseString = array.reverse(); // [a,c,i,m,a,c,A]
+        return reverseString.join(""); // acimacA
+      };
+
+      console.log("Acamica".reverse());
+
+      /*const usuarios = [
+        "jhfonseca72",
+        "jilmarmanga",
+        "AdamBien",
+        "christianbaezm",
+      ];
+
+      async function cargarDatosDesdeApi(usuario) {
+        const resultado = await fetch(
+          `https://api.github.com/users/${usuario}`
+        );
+        const json = await resultado.json();
+        console.log(json.avatar_url);
+
+        const followers = await fetch(json.followers_url); //Promise
+        const jsonFollower = await resultado.json(); //[]
+
+        console.log(usuario, jsonFollower);
+        crearImage(json.avatar_url);
+      }
+
+      function crearImage(avatar_url, followers) {
+        let img = document.createElement("img");
+        img.src = avatar_url;
+        img.style.height = "200px";
+
+        document.querySelector("#test").appendChild(img);
+        for (let index = 0; index < followers.length; index++) {
+          let label = document.createElement("label");
+          label.textContent = followers[index].login;
+          document.querySelector("#test").appendChild(label);
+        }
+      }
+
+      const promises = [];
+      for (let index = 0; index < usuarios.length; index++) {
+        promises.push(cargarDatosDesdeApi(usuarios[index])); //[Promise, Promise, Promise, Promise]
+      }
+
+      Promise.all(promises).then();*/
+
+      fetch("https://601c74da1a9c220017060a09.mockapi.io/api/v1/products")
+        .then((resultado) => {
+          return resultado.json();
+        })
+        .then((json) => console.log(json))
+        .catch((e) => console.log("Catch", e));
+
+      async function loadProducts() {
+        try {
+          const resultado = await fetch(
+            "https://601c74da1a9c220017060a09.mockapi.io/api/v1/products"
+          ); //Response ... json() -> Promise
+          const json = await resultado.json();
+          return json; //
+        } catch (e) {
+          console.log("Catch", e);
+          return "abc";
+        }
+      }
+
+      (async function () {
+        const json = await loadProducts();
+        console.log("JSON", json);
+      })();
+
+      /*let img = document.createElement("img");
+        img.src = "https://avatars.githubusercontent.com/u/891845?v=4";
+        img.style.height = "200px";
+        document.querySelector("#test").appendChild(img);*/
+
+      //request params
+      //url: api.giphy.com/v1/gifs/trending?api_key=xxxxx&limit=7&offset=8&rating=pg&random_id=
+
+      const promise = new Promise(function (resolve, reject) {
+        //2min
+        resolve({src: "url...."}); // callWhenIsSuccess("Resolve value")
+      });
+
+      function callWhenIsSuccess(result) {
+        console.log("callWhenIsSuccess", result);
+      }
+
+      console.log("Promise", promise);
+      //promise.then(callWhenIsSuccess);
+
+      promise.then(function (result) {
+        result; //{src: "url...."}
+      });
+
+      promise.then((result) => {
+        console.log("callWhenIsSuccess arrow", result);
+      });
+
+      function printImage(data) {
+        console.log(data.src);
+      }
+
+      async function useAwait() {
+        const result = await promise;
+        //que es result? {src: "url...."}
+        const json = {data: [1, 2, 3]};
+        return json;
+      }
+      useAwait().then(function (json) {
+        console.log(json.data.join("-"));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @keyframes animationRight {
+        from {
+          right: 10%;
+        }
+        to {
+          left: 0%;
+        }
+      }
+      .animation-right {
+        animation: animationRight 10ms;
+      }
+
+      .animation-left {
+        animation: animationRight 10ms;
+      }
+      .myImage {
+        padding: 10px;
+        animation: animation 10ms;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="images"></div>
+    <button>Ver mas</button>
+    <script>
+      const endpoint_search = "http://api.giphy.com/v1/gifs/search";
+      const api_key = "6AZdbonZwDZz5GrFbGYYjcdUgZ6UwrPB";
+      let limit = 12;
+      let offset = 0;
+      const texto = "Mascotas";
+
+      //test.querystr.com/v1/search
+
+      //querystring, request parameters
+      //http://api.giphy.com/v1/gifs/search?api_key=6AZdbonZwDZz5GrFbGYYjcdUgZ6UwrPB&q=mascotas&limit=2&offset=10
+
+      //path variables
+      //http://api.giphy.com/v1/gifs/search/6AZdbonZwDZz5GrFbGYYjcdUgZ6UwrPB/mascotas/2/10
+
+      //request body -> POST, PUT, GET, DELETE
+      //headers
+
+      //funcion como expresion
+      http: const searchEndpoint = async (q, offset) => {
+        const data = await fetch(
+          `${endpoint_search}?api_key=${api_key}&q=${q}&limit=${limit}&offset=${offset}`
+        );
+        const json = await data.json();
+        return json;
+      };
+
+      const createImages = (images) => {
+        for (let index = 0; index < images.data.length; index++) {
+          const image = document.createElement("img");
+          image.classList.add("animation-right");
+          image.src = images.data[index].images.fixed_width.url;
+          document.getElementById("images").appendChild(image);
+        }
+      };
+
+      const removeImages = () => {
+        document.getElementById("images").innerHTML = "";
+      };
+
+      //funcion declarativa
+      async function loadProducts() {}
+
+      const button = document.getElementsByTagName("button")[0];
+      button.addEventListener("click", async () => {
+        offset += limit + 1;
+        const images = await searchEndpoint(texto, offset);
+        console.log(images);
+        removeImages();
+        createImages(images);
+      });
+
+      //funcion de ejecucion inmediata
+      (async function () {
+        let images = await searchEndpoint(texto, 0);
+        console.log(images);
+        createImages(images);
+      })();
+    </script>
+  </body>
+</html>

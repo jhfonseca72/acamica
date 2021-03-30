@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="eventsContainer"></div>
+    <template id="eventRow">
+      <div class="fl-event-row">
+        <div class="fl-img-event"></div>
+        <div>
+          <p>The King And I</p>
+          <p>Wed, Feb 3, 2021 at 1:30pm</p>
+          <p>Drury Lane Theatre Oakbrook Terrace - Oakbrook Terrace, IL</p>
+        </div>
+      </div>
+    </template>
+    <script>
+      const mergeArr1 = (arr1, arr2) => {
+        const noRepeatElements = new Set();
+
+        for (let index = 0; index < arr1.length; index++) {
+          noRepeatElements.add(arr1[index]);
+        }
+
+        for (let index = 0; index < arr2.length; index++) {
+          noRepeatElements.add(arr2[index]);
+        }
+
+        console.log(
+          "mergeArr1",
+          Array.from(noRepeatElements).sort((a, b) => a - b)
+        );
+      };
+
+      const arr5 = [1, 3, 5, 7, 9, 11, 12];
+      const arr6 = [1, 2, 3, 4, 5, 10, 12];
+
+      const mergeArrays = (arr1, arr2) => {
+        const val = [];
+        for (let index = 0; index < arr1.length; index++) {
+          val.push(arr1[index]);
+        }
+
+        for (let i = 0; i < arr2.length; i++) {
+          let exist = false;
+          for (let j = 0; j < val.length; j++) {
+            if (arr2[i] === val[j]) {
+              exist = true;
+              break;
+            }
+          }
+          if (!exist) {
+            val.push(arr2[i]);
+          }
+        }
+        console.log(
+          "mergeArrays",
+          val.sort((a, b) => a - b)
+        );
+      };
+
+      mergeArrays(arr5, arr6);
+      mergeArr1(arr5, arr6);
+
+      const data = {
+        perfomer: "The King And I",
+        date: "Wed, Feb 3, 2021 at 1:30pm",
+        venue: "Drury Lane Theatre Oakbrook Terrace - Oakbrook Terrace, IL",
+      };
+
+      const flEventContainer = document.querySelector(".eventsContainer");
+      const templateEventRow = document.querySelector("#eventRow");
+
+      for (let index = 0; index < 6; index++) {
+        const eventRow = templateEventRow.content.cloneNode(true);
+        const listP = eventRow.querySelectorAll("p");
+        listP[0].textContent = data.perfomer;
+        listP[1].textContent = data.date;
+        listP[2].textContent = data.venue;
+        flEventContainer.appendChild(eventRow);
+      }
+    </script>
+  </body>
+</html>

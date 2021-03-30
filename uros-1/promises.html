@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="user" value="AdamBien" />
+    <button id="btnConsultar">Consultar</button>
+
+    <script>
+      function syncCode() {
+        console.log("Random", Math.random());
+      }
+
+      console.log("Start Sync Code");
+      syncCode();
+      console.log("End Sync Code");
+
+      function asyncCode() {
+        setTimeout(() => console.log("Random", Math.random()), 3000);
+      }
+
+      console.log("Start ASync Code");
+      asyncCode();
+      console.log("End ASync Code");
+
+      const promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve({operation: "Success"}), 2000);
+      });
+
+      function procesarRespuesta(respuesta) {
+        console.log(respuesta);
+      }
+
+      promise.then(procesarRespuesta);
+
+      try {
+        //... throw new Error("Hubo un error");
+      } catch (e) {}
+
+      const flag = true;
+
+      const promiseError = new Promise((resolve, reject) => {
+        if (!flag) {
+          reject("Hubo un error"); //throw new Error("Hubo un error")
+        } else {
+          resolve("Todo fue exitoso");
+        }
+      });
+
+      function procesarError(respuesta) {
+        console.log(respuesta);
+      }
+
+      promiseError.then((respuesta) => console.log(respuesta));
+      promiseError.catch((error) => console.log("Errr", error));
+
+      /**
+  fetch
+  */
+      //xml, json
+      const json = '{ "a": "abbb" }';
+      console.log(json);
+
+      const myObject = JSON.parse(json);
+      console.log(myObject.a);
+
+      const URL = "https://api.github.com/users/";
+      const btnConsultar = document.getElementById("btnConsultar");
+
+      function agregarImagen(avatar_url) {
+        //avatar_url = sadasd
+        let img = document.createElement("img"); //"<img>"
+        img = avatar_url; //img = sadasd
+
+        img.src = avatar_url; //<img src="sadasd">
+        img.style.height = "200px"; //<img src="sadasd" style="height:200px">
+
+        document.querySelector("body").appendChild(img);
+      }
+
+      btnConsultar.addEventListener("click", (e) => {
+        const username = document.getElementById("user");
+        const searchByUsername = fetch(`${URL}${username.value.trim()}`);
+
+        //respuesta Response#json -> Promise de algo
+        searchByUsername
+          .then((respuesta) => respuesta.json())
+          .then((misDatos) => agregarImagen(json.avatar_url))
+          .catch((error) => alert("Error"));
+      });
+
+      let promise1 = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("Acamica DWFS"), 2000);
+      });
+
+      let promise2 = new Promise((resolve, reject) => {
+        setTimeout(() => resolve(["Jhon", "Roman", "Diego"]), 1000);
+      });
+
+      // [ ...  ]
+      function ejecutarCUandoLaPromesaTermine(resultados) {
+        console.log(resultados[0], resultados[1]);
+      }
+
+      //Promise<[any, any]> => ["", []] //resultados es un arreglo
+      Promise.all([promise1, promise2]).then(ejecutarCUandoLaPromesaTermine);
+      Promise.all([promise1, promise2]).then((resultados) =>
+        console.log(resultados[0], resultados[1])
+      );
+
+      /*let barraProgreso = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      //transitions
+      resolve("Acamica DWFS"), 2000);
+  });
+
+  let consumirAPIAvianca = new Promise((resolve, reject) => {
+    setTimeout(() => resolve(["Jhon", "Roman", "Diego"]), 2000);
+  });
+
+  Promise.race([barraProgreso, consumirAPIAvianca]).then((resultados) =>
+    console.log("race", resultados)
+  );*/
+
+      let productos = new Promise((resolve, reject) => {
+        setTimeout(() => resolve(["cocacola", "cheetos"]), 2000);
+      });
+
+      let campanas = new Promise((resolve, reject) => {
+        setTimeout(() => reject("Error campanas"), 3000);
+      });
+
+      let seguros = new Promise((resolve, reject) => {
+        setTimeout(() => reject("Erroro seguros"), 1000);
+      });
+
+      Promise.all([productos, campanas, seguros])
+        .then((resultados) => console.log("Resultados", resultados))
+        .catch((error) => console.log(error));
+
+      productos
+        .then((productos) => {
+          console.log("productos", productos);
+          return campanas;
+        })
+        .then((resultadoCampans) => {
+          console.log("resultadoCampans", resultadoCampans);
+          return seguros;
+        })
+        .then((resultadoSeguros) => {
+          console.log("resultadoSeguros", resultadoSeguros);
+        })
+        .catch((error) => console.log("ERRRROR", error));
+
+      class Persona {
+        constructor(name) {}
+      }
+      const persona1 = new Persona("Jilmar");
+      const persona2 = new Persona("John");
+
+      class MyPromise {
+        constructor(myFnResolve, myFnReeject) {
+          if (myFnResolve) {
+            myFnResolve();
+          } else {
+            myFnReeject();
+          }
+        }
+      }
+
+      function resolveTest() {
+        console.log("Resolve");
+      }
+
+      function reject() {
+        console.log("Reject");
+      }
+
+      const myPromiseObject = new MyPromise(resolveTest, reject);
+
+      /**
+       *
+       */
+      const flag = false;
+      let promise = new Promise((resolve, reject) => {
+        if (flag) {
+          resolve({title: "Acamica", team: "uros-1"});
+        } else {
+          reject("EL flag es false"); //Oiga genere un error
+        }
+      });
+
+      console.log(promise);
+      promise
+        .then((value) => console.log("Then", value))
+        .catch((reason) => console.log("Error", reason));
+
+      /**
+       * Nested Promises
+       */
+      const secondPromise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve({title: "Acamica", team: "uros-1"}), 3000);
+      });
+
+      const nestedPromise = new Promise((resolve, reject) => {
+        resolve(secondPromise);
+      });
+
+      console.log("nestedPromise", nestedPromise); //Promise
+      nestedPromise
+        .then((value) => {
+          return value;
+        })
+        .then((valueSecondPromise) =>
+          console.log("valueSecondPromise", valueSecondPromise)
+        );
+
+      const promiseFetch = fetch(
+        "https://601c74da1a9c220017060a09.mockapi.io/api/v1/products"
+      );
+
+      promiseFetch
+        .then((resultado) => {
+          console.log("Response", resultado);
+          return resultado.json(); //Promise
+        })
+        .then((json) => {
+          console.log("Json", json);
+          return new Promise((resolve, reject) => {
+            const prueba = {
+              json,
+              type: "Test",
+            };
+            setTimeout(() => resolve(prueba), 3000);
+          });
+        })
+        .then((resultado) => {
+          console.log("resultado", resultado);
+        })
+        .catch((e) => console.log("Catch", e));
+
+      /**
+       *
+       */
+      async function translateWithAsynAwait() {
+        try {
+          const promiseFetch = fetch(
+            "https://601c74da1a9c220017060a09.mockapi.io/api/v1/products"
+          );
+          const fetchResult = await promiseFetch;
+          console.log("Response", fetchResult);
+          const json = await fetchResult.json();
+          console.log("Json", json);
+          const newJson = await new Promise((resolve, reject) => {
+            const prueba = {
+              json,
+              type: "Test",
+            };
+            setTimeout(() => resolve(prueba), 3000);
+          });
+          console.log(newJson);
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      /**
+       * async/await
+       */
+
+      const awaitTets = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("Hey!!"), 2000);
+      });
+      async function test() {
+        const resultado = await awaitTets;
+        console.log(resultado); //Hey
+      }
+
+      console.log("test", test); //function
+      console.log("test2", test()); //Promise
+      test()
+        .then((value) => console.log(value))
+        .catch((error) => console.log(ee)); //test
+    </script>
+  </body>
+</html>
