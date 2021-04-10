@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /***
+       *
+       * // For loop structure
+       * for(initialization; condition,; increment/decrement){
+       *    // code goes here
+       * }
+       *
+       */
+      const numeroVecesAEjecutar = 5;
+
+      for (let i = 0; i < numeroVecesAEjecutar; i++) {
+        console.log("Running");
+      }
+
+      // i: 0    0<5  true
+      // i: -1   -1<5 true
+      // i: -2   -2<5 true
+      //....
+
+      /**
+       */
+      let numero1 = prompt("Insert number first option");
+      let suma1 = [];
+      for (; numero1 !== "stop"; ) {
+        suma1.push(parseInt(numero1));
+        numero1 = prompt("Insert number first option");
+      }
+      console.log("Sum using the first option", suma1);
+
+      /**
+       */
+      let numero2 = prompt("Insert number second option");
+      let suma2 = [];
+      for (;;) {
+        if (numero2 === "stop") {
+          break;
+        } else {
+          suma2.push(parseInt(numero2));
+          numero2 = prompt("Insert number second option");
+        }
+      }
+      console.log("Sum using the second option", suma2);
+
+      /**
+       */
+      let numero3 = prompt("Insert number third option");
+      let suma3 = [];
+      while (numero3 !== "stop") {
+        suma3.push(numero3);
+        numero3 = prompt("Insert number third option");
+      }
+      console.log("Sum using the third option", suma3);
+
+      /**
+       */
+      let suma4 = [];
+      do {
+        let numero4 = prompt("Insert number fourth option");
+        if (numero4 === "stop") {
+          break;
+        } else {
+          sum4.push(parseInt(numer4));
+        }
+      } while (true);
+      console.log("Sum using the fourth option", suma4);
+    </script>
+  </body>
+</html>

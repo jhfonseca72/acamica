@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Persona {
+        constructor(valorNombre, valorEdad) {
+          this.nombre = valorNombre;
+          this.edad = valorEdad;
+          this.apellido = "Garcia";
+          this.estadoDeSalud = "SIn covid";
+        }
+
+        modificarEdad(nuevaEdad) {
+          this.edad = nuevaEdad;
+        }
+
+        obtenerEdad() {
+          return this.edad;
+        }
+      }
+
+      const juan = new Persona("Juan", 90);
+      juan.modificarEdad(78);
+
+      console.log(juan.obtenerEdad());
+
+      const johana = new Persona("Johana", 90);
+      console.log(johana);
+
+      /*
+      class Avion {
+        constructor(valorModelo, valorAerolinea, valorNumeroSillas) {
+          this.modelo = valorModelo;
+          this.numeroSillas = valorNumeroSillas;
+          this.aerolinea = valorAerolinea;
+        }
+
+        unirPropiedades() {
+          return this.modelo + " " + this.aerolinea + " " + this.numeroSillas; //string
+        }
+
+        setModelo(nuevoModelo) {
+          this.modelo = nuevoModelo;
+        }
+      }
+
+      const avianca637 = new Avion("637", "Avianca", 23);
+      console.log(avianca637.unirPropiedades());
+
+      avianca637.setModelo("098");
+      console.log(avianca637.unirPropiedades());
+
+      const wingo436 = new Avion("436", "Wingo", 89);
+      console.log(wingo436.unirPropiedades());
+
+      const viva890 = new Avion(99999, "Wingo", 89);
+      console.log(viva890.unirPropiedades());
+
+      const modelo = prompt("Ingrese el modelo");
+      const numeroDeSillas = prompt("Ingrese numero de sillas"); //isNaN
+      const aerolinea = prompt("Ingrese la aerolinea");
+
+      const nuevoAvion = new Avion(modelo, aerolinea, numeroDeSillas);
+      console.log(nuevoAvion.unirPropiedades());*/
+    </script>
+  </body>
+</html>

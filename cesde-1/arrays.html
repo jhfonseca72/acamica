@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //Algo de scope en functions, if and loops
+      function printName() {
+        let a = 0;
+      }
+      //console.log("Access", a); //Lanzara un error porque la variable a fue declara adentro de la funcion
+
+      if (true) {
+        let b = 0;
+      }
+      //console.log("Access b", b); //Lanzara un error porque la variable b fue declara adentro del if
+
+      for (let index = 0; index < 4; index++) {
+        const element = "";
+      }
+      //alert(element); //Lanzara un error porque la variable element fue declara adentro del for
+
+      //Definimos un arreglo vacio
+      const articulos = [];
+      articulos.push("leche");
+      articulos.push("arroz");
+      articulos.push(false);
+      articulos.push(1);
+      articulos.push({});
+      articulos.push(["la vaquita", "merkepaisa"]);
+
+      const primerElemento = articulos[1];
+      const supermercado = articulos[5];
+      console.log(supermercado.length, supermercado[2]);
+
+      const otrosSupermercados = [
+        "la vaquita",
+        "merkepaisa",
+        "exito",
+        "carulla",
+      ];
+
+      //Removiendo el elemento de la posicion 2
+      otrosSupermercados.splice(3, 1);
+      console.log("Arreglo con elemento eliminado", otrosSupermercados);
+
+      //Recorriendo el arreglo y eliminando la posicion 2
+      const nuevoArray = [];
+      for (let index = 0; index < otrosSupermercados.length; index++) {
+        if (index != 2) {
+          nuevoArray.push(otrosSupermercados[index]);
+        }
+      }
+      console.log("Eliminando elmento en una posicion especifica", nuevoArray);
+
+      // otrosSupermercados.length = 4 numero de elementos que tiene el arreglo
+      // index = siempre inicia en 0
+      for (let index = 0; index <= otrosSupermercados.length; index++) {
+        console.log(index, otrosSupermercados[index]);
+      }
+
+      for (let index = 0; index <= otrosSupermercados.length; index++) {
+        console.log(index, otrosSupermercados[index]);
+      }
+
+      let i = 0;
+      while (i <= otrosSupermercados.length) {
+        console.log("Contador", i, "Valor", otrosSupermercados[i]);
+        i = i + 1; //i++
+      }
+
+      /*let numeroIngresadoPorElUsuario = prompt("Ingrese un texto"); //string
+
+      let numeros = [];
+      while (numeroIngresadoPorElUsuario !== "Stop") {
+        numeros.push(numeroIngresadoPorElUsuario);
+        numeroIngresadoPorElUsuario = prompt("Ingrese un texto");
+      }
+      console.log("MIs NUmero", numeros);*/
+
+      /*let numero = prompt("Insert number");
+      let suma = [];
+
+      for (; numero !== "stop"; ) {
+        suma.push(parseInt(numero));
+        numero = prompt("insert another number");
+      }
+      console.log(suma);
+
+      let numero = prompt("Insert number");
+      let suma = [];
+
+      for (;;) {
+        if (numero === "stop") {
+          break;
+        } else {
+          suma.push(parseInt(numero));
+          numero = prompt("insert another number");
+        }
+      }
+      console.log(suma);
+
+      let suma = [];
+      do {
+        let numero = prompt("Insert number");
+        if (numero === "stop") {
+          break;
+        }
+        suma.push(parseInt(numero));
+      } while(true)*/
+
+      const fn = (fn2) => {
+        fn2 && fn2();
+      };
+
+      fn();
+      fn(() => {
+        console.log("ABC");
+      });
+
+      /*
+      1 -> numeroIngresadoPorElUsuario = 1
+        -> numeroIngresadoPorElUsuario !== "Stop" true
+        -> numeros = [1]
+
+        -> numeroIngresadoPorElUsuario = Stop
+        -> numeroIngresadoPorElUsuario !== "Stop" false
+      */
+
+      //index 0 - la vaquita
+      //index 1 - merkepaisa
+      //index 2 - exito
+      //index 3 - carulla
+      //otrosSupermercados.length - 4
+
+      //index 0 - otrosSupermercados[0] - Valor en el index - "la vaquita"
+      //index 1 - otrosSupermercados[1] - Valor en el index - "merkepaisa"
+      //index 2 - otrosSupermercados[2] - Valor en el index - "exito"
+      //index 3 - otrosSupermercados[3] - Valor en el index - "carulla"
+      //index 4 - otrosSupermercados[4] - Valor en el index - undefined
+    </script>
+  </body>
+</html>

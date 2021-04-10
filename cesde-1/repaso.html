@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*const nombre = "Jhoner";
+      const email = "jhoner2@yahoo.com";
+      const telefono = 3127395750;
+      const imagen = "imagen 1";
+
+      const nombre2 = "Jhoner2";
+      const email2 = "jhoner2...@yahoo.com";
+      const telefono2 = 3127395750;
+      const imagen2 = "imagen 2";
+
+      const nombre3 = "Jhoner3";
+      const email3 = "jhoner3...@yahoo.com";
+      const telefono3 = 3127395750;
+      const imagen3 = "imagen 3";
+
+      const directorio = [];
+      directorio.push(nombre); // directorio[0]
+      directorio.push(email); // directorio[1]
+      directorio.push(telefono); // directorio[2]
+      directorio.push(imagen); // directorio[3]
+
+      directorio.push(nombre2); // directorio[4]
+      directorio.push(email2); // directorio[5]
+      directorio.push(telefono2); // directorio[6]
+      directorio.push(imagen2); // directorio[7]
+
+      directorio.push(nombre3); // directorio[8]
+      directorio.push(email3); // directorio[9]
+      directorio.push(telefono3); // directorio[10]
+      directorio.push(imagen3); // directorio[11]
+
+      //for(init, conditi, incremente/decremento)
+      //directorio.length -> 12
+
+      console.log(directorio[4]); //nombre2 -> Jhoner2
+
+      console.log(directorio[4], directorio[5], directorio[6], directorio[7]); //usando el index directamente
+
+      for (let index = 8; index <= directorio.length - 1; index++) {
+        console.log("contacto", directorio[index]);
+      }
+
+      console.log("****************************");
+      // index=8 => directorio[index] => directorio[8] = Jhoner3
+      // index=9 => directorio[index] => directorio[9] = "jhoner3...@yahoo.com"
+
+      for (let index = 4; index <= 7; index++) {
+        console.log("contacto", directorio[index]);
+      }*/
+
+      class Persona {
+        constructor(valorNombre, valorTelefono) {
+          this.imagen = "";
+          this.nombre = valorNombre;
+          this.email = "";
+          this.telefono = valorTelefono;
+        }
+        modificarEmail(nuevoEmail) {
+          this.email = nuevoEmail;
+        }
+        modificarImage(nuevaImage) {
+          this.imagen = nuevaImage;
+        }
+      }
+
+      const jhoner = new Persona("Jhoner", 32456666);
+      jhoner.modificarImage("imagen de jhoner");
+      console.log(jhoner);
+
+      jhoner.modificarEmail("jhoner@yahoo.com");
+      console.log(jhoner.email);
+
+      const diana = new Persona("Diana", 988789);
+      console.log(diana.telefono);
+
+      const juan = new Persona("Juan", 6576567);
+      const jair = new Persona("Jair", 6576567);
+      const salome = new Persona("Salome", 6576567);
+      const john = new Persona("John", 6576567);
+
+      const directorio = [];
+      directorio.push(jhoner); //index: 0
+      directorio.push(diana); //index:1
+      directorio.push(juan); //index:2
+      directorio.push(jair); //index:3
+      directorio.push(salome); //index:4
+      directorio.push(john); //index:5
+
+      //push unicamente para agregar un element al arreglo
+
+      //directorio[0] => jhoner => { nombre, ....}
+      console.log(directorio[0].nombre);
+      console.log(directorio[1].nombre);
+      console.log(directorio[2].nombre);
+      console.log(directorio[3].nombre);
+      console.log(directorio[4].nombre);
+
+      console.log("Console es solo para imprimier un texto en la console");
+      let imagen = directorio; // imagen = [juan, diana, ...]
+      let contador = 0;
+
+      for (let index = 0; index <= directorio.length - 1; index++) {
+        if (directorio[index].imagen === "") {
+          contador = contador + 1;
+        }
+      }
+      console.log(contador);
+
+      //index: 0 -> directorio[index] -> jhoner -> {email, nombre, ...}
+      //index: 1 -> directorio[index] -> diana -> {email, nombre, ...}
+      //index: 2 -> ...
+    </script>
+  </body>
+</html>
