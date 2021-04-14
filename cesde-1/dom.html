@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .galery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .color {
+        color: white;
+        padding: 20px;
+        margin: 10px;
+      }
+
+      .container {
+        width: 250px;
+        height: 250px;
+        background: red;
+      }
+
+      .card {
+        width: 250px;
+        height: 250px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container-1">
+      <div>8989089080980</div>
+      <label>sadhkashjdkashkjd</label>
+    </div>
+
+    <div class="card">1</div>
+    <div class="card">2</div>
+    <div class="card">3</div>
+
+    <input type="text" value="Texto 1" />
+    <input type="text" value="Texto 2" />
+    <input type="text" value="Texto 3" />
+
+    <script>
+      console.log(document);
+
+      const container = document.getElementById("container-1"); //element
+      /*container.style.background = "red";
+      container.style.width = "250px";
+      container.style.height = "250px";*/
+      //container.setAttribute("style","background: red; width: 250px; height: 250px");
+      //container.classList.add("container");
+      //container.textContent = "<b>hsakjdhjakshdkjasdhkj</b>";
+      //container.innerHTML = "<b>hsakjdhjakshdkjasdhkj</b>";
+      //container.outerHTML
+
+      const htmlInterno = container.innerHTML;
+      //console.log("sdahkjashdkjashdjkhsajk");
+
+      const cards = document.getElementsByClassName("card"); //Array de elements
+      cards[1].style.background = "yellow";
+
+      const divs = document.getElementsByTagName("div"); //Array
+      console.log(divs);
+
+      const card1 = document.querySelectorAll("body input");
+      console.log(card1);
+
+      const input = document.querySelector("input"); //HTMLElement
+      console.log(input.value);
+
+      const img = document.createElement("img");
+      img.setAttribute("src", "https://picsum.photos/200/300");
+
+      container.before(img);
+
+      localStorage.setItem("inputValue", input.value);
+      //alert(localStorage.getItem("inputValue"));
+
+      const input2 = document.querySelector("input:nth-of-type(2)");
+      console.log(input2.value);
+
+      //sessionStorage.setItem("inputValue", input.value); // se elimina cuando se cierra el navegador
+
+      /*** Programamos **/
+      const nombre = prompt("INgrese nombre");
+      const background = prompt("Ingrese el background");
+      const fontSize = prompt("Ingrese el fotn size");
+
+      const div = document.createElement("div");
+      div.setAttribute("id", "mi-container");
+      div.textContent = nombre;
+      div.style.background = background;
+      div.style.fontSize = fontSize + "px";
+      document.querySelector("#container-1").before(div);
+    </script>
+  </body>
+</html>
