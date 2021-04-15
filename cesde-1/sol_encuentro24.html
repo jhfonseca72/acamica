@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="usuarios"></div>
+    <script>
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+      const usuarios = [];
+
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/class
+      class Persona {
+        constructor(usuario, contrasena) {
+          this.usuario = usuario;
+          this.contrasena = contrasena;
+          this.estado = true;
+        }
+      }
+
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+      const crearUsuario = () => {
+        //https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
+        const usuario = prompt("Ingrese el usuario");
+        const contrasena = prompt("Ingrese la constrasena");
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
+        const nuevoUsuario = new Persona(usuario, contrasena);
+        usuarios.push(nuevoUsuario);
+      };
+
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+      const modificarUsuario = () => {
+        const nombreUsuario = prompt("Ingrese el usuario");
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
+        let usuario = null;
+        for (let index = 0; index < usuarios.length; index++) {
+          if (usuarios[index].usuario === nombreUsuario) {
+            usuario = usuarios[index];
+
+            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break
+            break;
+          }
+        }
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else
+        if (!usuario) {
+          alert("No existe el usuario " + usuario);
+        } else {
+          usuario.contrasena = prompt("Ingrese la nueva constrasena");
+        }
+      };
+
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+      const logIn = () => {
+        const nombreUsuario = prompt("Ingrese el usuario");
+        const contrasena = prompt("Ingrese la constrasena");
+
+        /**
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+         */
+        let existe = usuarios.find(
+          (object) =>
+            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_inequality
+            object.usuario === nombreUsuario &&
+            object.contrasena === contrasena &&
+            object.estado === true
+        );
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else
+        if (existe) {
+          //https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
+          alert("Bienvenido!!");
+        } else {
+          alert("No existe el usuario " + nombreUsuario);
+        }
+      };
+
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+      const pintarUsuario = () => {
+        //https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
+        const divUsuarios = document.querySelector(".usuarios");
+        divUsuarios.innerHTML = "";
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
+        for (const object of usuarios) {
+          //https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+          const label = document.createElement("p");
+
+          //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Addition
+          label.textContent =
+            "Usuario: " + object.usuario + " Pass: " + object.contrasena;
+          divUsuarios.appendChild(label);
+        }
+      };
+
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+      const mostrarMenu = () => {
+        let opcion = prompt(
+          "Las siguientes son las opciones que puede realizar en el sistema\n" +
+            "1 para crear un usuario \n" +
+            "2 para actualizar un usuario \n" +
+            "3 para hacer log in \n" +
+            "4 para salir"
+        );
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR
+        if (opcion === null || opcion === "4") {
+          alert("Gracias por visitarnos");
+          return false;
+        }
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
+        if (isNaN(opcion)) {
+          alert("Opción invalida intentelo de nuevo");
+          return true;
+        }
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+        opcion = parseInt(opcion);
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND
+        if (opcion !== 1 && opcion !== 2 && opcion !== 3 && opcion !== 4) {
+          alert("Opción invalida intentelo de nuevo 1");
+          return true;
+        }
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+        switch (opcion) {
+          case 1:
+            crearUsuario();
+            break;
+          case 2:
+            modificarUsuario();
+            break;
+          case 3:
+            logIn();
+            break;
+        }
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/return
+        return true;
+      };
+
+      //Usando un while para mostrar el menu hasta que el usuario ingrese la opcion 4 o de click en cancelar
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while
+      while (mostrarMenu());
+
+      pintarUsuario();
+    </script>
+  </body>
+</html>
