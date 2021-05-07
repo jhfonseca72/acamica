@@ -1,14 +1,19 @@
+/**
+ * 
+ * @param {*} titulo 
+ */
 async function searchMovie(titulo) {
     const apikey = "usar su api key";
 
-    //const strconcat = "http://www.omdbapi.com/?t=" + titulo + "&apikey=9f8f70d9";
-    const strinterpolate = `http://www.omdbapi.com/?t=${titulo}&apikey=${apikey}`;
+    const strconcat = "http://www.omdbapi.com/?t=" + titulo + "&apikey=" + apikey;
+    //const strinterpolate = `http://www.omdbapi.com/?t=${titulo}&apikey=${apikey}`;
 
     const respuesta= await fetch(strinterpolate);
     const pelicula= await respuesta.json()
     console.log(pelicula);
     crearCartaHTML(pelicula.Poster, pelicula.Title, pelicula.Plot);
 }
+
 
 function crearCartaHTML(poster, title, plot){
     const div = document.createElement("div");

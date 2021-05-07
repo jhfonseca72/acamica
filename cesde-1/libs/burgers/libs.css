@@ -1,0 +1,50 @@
+body {
+  font-family: "Poppins";
+  background: rgb(170,34,195);
+  background: linear-gradient(0deg, rgba(170,34,195,0.18951330532212884) 0%, rgba(45,170,253,0.396796218487395) 100%);
+  height: 100vh;
+  color:#4b72a6
+}
+
+main {
+  padding: 5rem;
+}
+
+h2 {
+  color: #c40a67;
+  margin-top: 4rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.map_container {
+  width: 100%;
+  height: 300px;
+  border-radius: 2rem;
+}
+
+.product-container{
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+
+.phone-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+
+.product {
+  background-color: #fff;
+  border-radius: 15px;
+  margin: 0;
+  border: #fff solid 1px;
+}
+
+.product img {
+  width: 15rem;
+  height: 15rem;
+  margin: 12px;
+
+  border-radius: 5px;
+}
