@@ -1,14 +1,16 @@
 <!doctype html>
 <html>
+
 <head>
 	<meta charset="utf-8" />
 </head>
+
 <body>
 	<form>
 		<div>
 			<canvas></canvas>
 			<figure>
-				<img id="img" width="600" height="120"/>	
+				<img id="img" width="600" height="120" />
 				<button>Download</button>
 			</figure>
 		</div>
@@ -16,7 +18,7 @@
 
 	<script type="text/javascript">
 
-		window.addEventListener("load", downloadImageUsingCanvas );
+		window.addEventListener("load", downloadImageUsingLinkAndBlob);
 		const IMAGE_URL = "https://a.vsstatic.com/company/rewards/v2/rewards-slider.jpg";
 
 
@@ -27,29 +29,28 @@
 
 			image.addEventListener("click", (event) => {
 				const url = event.target.src;
-				getImage(url);	
-			});			
+				getImage(url);
+			});
 
-			async function getImage(url){
+			async function getImage(url) {
+
 				const imageFetch = await fetch(url);
 				const file = await imageFetch.blob();
-				
+				const urlBlob = URL.createObjectURL(file);
+
 				const a = document.createElement("a");
 				a.download = "myImage";
-
-				const urlBlob = URL.createObjectURL(file);
 				a.href = urlBlob;
 				a.textContent = "Download"
 
-				URL.revokeObjectURL(urlBlob);
 				document.body.appendChild(a);
 			}
 		}
 
 
 		function downloadImageUsingCanvas() {
-			
-			let canvas = document.querySelector( "canvas" );
+
+			let canvas = document.querySelector("canvas");
 			let context = canvas.getContext('2d');
 
 			//context.drawImage(this, 0, 0, this.width, this.height); Use this method when there is a custom size
@@ -58,11 +59,11 @@
 				canvas.height = this.naturalHeight;
 				context.textBaseline = "middle";
 				context.fillStyle = "#800";
-				context.drawImage(this, 0, 0); 
+				context.drawImage(this, 0, 0);
 			}
-	
-			function saveImageOnButtonClick( event ) {
-				var filename = ( "hashtag-meme-" + Date.now() + ".png" );
+
+			function saveImageOnButtonClick(event) {
+				var filename = ("hashtag-meme-" + Date.now() + ".png");
 				let a = document.createElement('a');
 				a.href = canvas.toDataURL("image/jpeg");
 				a.download = filename;
@@ -74,7 +75,7 @@
 			image.onload = drawImageActualSize;
 			image.src = IMAGE_URL;
 
-			canvas.addEventListener( "click", saveImageOnButtonClick );
+			canvas.addEventListener("click", saveImageOnButtonClick);
 		}
 	</script>
 
